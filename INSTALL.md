@@ -85,11 +85,29 @@ rm -rf ~/.claude/workflows-tmp
 #### 步骤 5: 安装插件
 
 ```bash
+# 方法 1: 使用一键安装脚本（推荐）
+./scripts/install-plugins.sh
+
+# 方法 2: 手动安装
 # 启动 Claude Code 后运行
-/plugin install claude-hud
 /plugin install ecc
+/plugin install claude-hud
 /plugin install superpowers
+/plugin install claude-code-zh-cn
+/plugin install claude-mem
 ```
+
+**插件列表**:
+
+| 插件 | 用途 | GitHub 仓库 |
+|------|------|-------------|
+| **ECC** | 核心插件 - 67 Agent + 271 Skills | [affaan-m/ECC](https://github.com/affaan-m/ECC) |
+| **Claude HUD** | 状态栏和进度显示 | [jarrodwatts/claude-hud](https://github.com/jarrodwatts/claude-hud) |
+| **Superpowers** | 增强功能和技能 | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
+| **Claude Code 中文** | 界面汉化 | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) |
+| **Claude Mem** | 记忆管理 | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) |
+
+详见 [PLUGINS.md](PLUGINS.md)
 
 ## 目录结构说明
 

@@ -54,11 +54,17 @@ git clone https://github.com/shuai-yemao/shuai-yemao-chip.git ~/shuai-yemao-chip
 cd ~/shuai-yemao-chip
 ./scripts/install.sh
 
-# 3. 配置 API Key
+# 3. 安装插件
+./scripts/install-plugins.sh
+
+# 4. 配置 API Key
 vim ~/.claude/settings.json
+
+# 5. 重启 Claude Code
+claude
 ```
 
-详见 [INSTALL.md](INSTALL.md)
+详见 [INSTALL.md](INSTALL.md) 和 [PLUGINS.md](PLUGINS.md)
 
 ## 核心配置说明
 
