@@ -2,105 +2,268 @@
 
 Claude Code 完整配置备份 — 用于在新电脑上快速恢复开发环境。
 
-## 仓库结构
+## 🏗️ 系统架构
 
+```mermaid
+graph TB
+    subgraph "Claude Code 配置系统"
+        A[CLAUDE.md<br/>全局指令] --> B[SOUL.md<br/>人格配置]
+        A --> C[AGENTS.md<br/>行为守则]
+        A --> D[USER.md<br/>用户配置]
+    end
+
+    subgraph "规则体系"
+        E[rules/] --> F[security/<br/>安全规则]
+        E --> G[workflow/<br/>工作流规则]
+        E --> H[embedded/<br/>嵌入式规则]
+        E --> I[privacy/<br/>隐私规则]
+        E --> J[ecc/<br/>ECC规则]
+    end
+
+    subgraph "Agent 系统"
+        K[agents/] --> L[code-reviewer]
+        K --> M[devops]
+        K --> N[embedded-expert]
+        K --> O[test-runner]
+    end
+
+    subgraph "插件系统"
+        P[plugins/] --> Q[ECC<br/>67 Agent + 271 Skills]
+        P --> R[Claude HUD<br/>状态栏]
+        P --> S[Superpowers<br/>增强功能]
+        P --> T[Claude 中文<br/>汉化]
+        P --> U[Claude Mem<br/>记忆管理]
+    end
+
+    B --> V[嵌入式系统架构师]
+    C --> W[权限等级 + 安全约束]
+    J --> X[ECC 标准规则]
+    Q --> Y[Agent 编排 + 工作流]
 ```
-shuai-yemao-chip/
-├── config/                 # 核心配置文件
-│   ├── CLAUDE.md          # 全局指令
-│   ├── SOUL.md            # 人格配置 (Chip)
-│   ├── AGENTS.md          # Agent 行为守则
-│   ├── USER.md            # 用户配置
-│   └── settings.json      # 主设置（已脱敏）
-├── rules/                  # 规则文件
-│   ├── security/          # 安全规则
-│   ├── workflow/          # 工作流规则
-│   ├── embedded/          # 嵌入式规则
-│   ├── privacy/           # 隐私规则
-│   └── ecc/               # ECC 规则
-├── agents/                 # Agent 定义
-│   ├── code-reviewer.md   # 代码审查 Agent
-│   ├── devops.md          # DevOps Agent
-│   ├── embedded-expert.md # 嵌入式专家 Agent
-│   └── test-runner.md     # 测试运行 Agent
-├── reference/              # 参考文档
-│   ├── EMBEDDED.md        # 嵌入式开发约束
-│   ├── SECURITY.md        # 安全规范
-│   └── WORKFLOWS.md       # 工作流 API 参考
-├── templates/              # 模板文件
-├── scripts/                # 脚本文件
-│   ├── install.sh         # 安装脚本
-│   └── wf.sh              # 工作流快捷命令
-├── bin/                    # 工具脚本
-├── INSTALL.md              # 安装指南
-└── README.md               # 本文件
+
+## 📦 仓库关系
+
+```mermaid
+graph LR
+    A[shuai-yemao-chip<br/>核心配置] --> B[shuai-yemao-chip-skills<br/>技能包]
+    A --> C[shuai-yemao-workflow<br/>工作流]
+
+    B --> D[85+ 技能]
+    C --> E[15+ 核心工作流]
+
+    A --> F[配置文件<br/>CLAUDE.md / SOUL.md / AGENTS.md]
+    A --> G[规则体系<br/>security / workflow / embedded]
+    A --> H[Agent 定义<br/>code-reviewer / devops / ...]
+    A --> I[插件配置<br/>ECC / HUD / Superpowers]
+
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e9
 ```
 
-## 相关仓库
+## 🚀 快速开始
 
-| 仓库 | 内容 | 地址 |
-|------|------|------|
-| **shuai-yemao-chip** | 核心配置 | https://github.com/shuai-yemao/shuai-yemao-chip |
-| **shuai-yemao-chip-skills** | 技能包 | https://github.com/shuai-yemao/shuai-yemao-chip-skills |
-| **shuai-yemao-workflow** | 工作流 | https://github.com/shuai-yemao/shuai-yemao-workflow |
-
-## 快速开始
+### 一键安装
 
 ```bash
-# 1. 克隆配置仓库
+# 克隆配置仓库
 git clone https://github.com/shuai-yemao/shuai-yemao-chip.git ~/shuai-yemao-chip
 
-# 2. 运行安装
+# 运行安装脚本
 cd ~/shuai-yemao-chip
 ./scripts/install.sh
 
-# 3. 安装插件
+# 安装插件
 ./scripts/install-plugins.sh
 
-# 4. 配置 API Key
+# 配置 API Key
 vim ~/.claude/settings.json
 
-# 5. 重启 Claude Code
+# 重启 Claude Code
 claude
 ```
 
-详见 [INSTALL.md](INSTALL.md) 和 [PLUGINS.md](PLUGINS.md)
+### 安装流程
 
-## 核心配置说明
+```mermaid
+flowchart TD
+    A[开始] --> B[克隆仓库]
+    B --> C[运行 install.sh]
+    C --> D[复制配置文件]
+    C --> E[复制规则目录]
+    C --> F[复制 Agent 定义]
+    C --> G[复制参考文档]
+    D --> H[运行 install-plugins.sh]
+    E --> H
+    F --> H
+    G --> H
+    H --> I[安装 ECC]
+    H --> J[安装 Claude HUD]
+    H --> K[安装 Superpowers]
+    H --> L[安装 Claude 中文]
+    H --> M[安装 Claude Mem]
+    I --> N[配置 API Key]
+    J --> N
+    K --> N
+    L --> N
+    M --> N
+    N --> O[重启 Claude Code]
+    O --> P[完成]
 
-### SOUL.md - Chip 人格
+    style A fill:#c8e6c9
+    style P fill:#c8e6c9
+    style N fill:#fff9c4
+```
 
-嵌入式系统架构师人格，专注于：
-- MCU 架构（ARM Cortex, STM32 HAL/SPL）
-- 外设驱动（ADC, DAC, DMA, Timer, I²C, SPI, CAN, UART）
-- 无线通信（BLE, WiFi, LoRa, MQTT）
-- RTOS（FreeRTOS）
-- 工具链（CMake, IAR, Keil, ESP-IDF, PlatformIO）
+## 📁 仓库结构
+
+```mermaid
+graph TB
+    subgraph "shuai-yemao-chip"
+        A[config/] --> A1[CLAUDE.md]
+        A --> A2[SOUL.md]
+        A --> A3[AGENTS.md]
+        A --> A4[USER.md]
+        A --> A5[settings.json]
+
+        B[rules/] --> B1[security/]
+        B --> B2[workflow/]
+        B --> B3[embedded/]
+        B --> B4[privacy/]
+        B --> B5[ecc/]
+
+        C[agents/] --> C1[code-reviewer.md]
+        C --> C2[devops.md]
+        C --> C3[embedded-expert.md]
+        C --> C4[test-runner.md]
+
+        D[reference/] --> D1[EMBEDDED.md]
+        D --> D2[SECURITY.md]
+        D --> D3[WORKFLOWS.md]
+
+        E[scripts/] --> E1[install.sh]
+        E --> E2[install-plugins.sh]
+        E --> E3[wf.sh]
+
+        F[bin/] --> F1[model-switch]
+        F --> F2[switch-api.js]
+    end
+
+    style A fill:#e3f2fd
+    style B fill:#fce4ec
+    style C fill:#e8f5e9
+    style D fill:#fff3e0
+    style E fill:#f3e5f5
+```
+
+## 🔌 插件系统
+
+```mermaid
+graph TB
+    subgraph "已安装插件"
+        A[ECC] --> A1[67 Agent]
+        A --> A2[271 Skills]
+        A --> A3[92 Commands]
+
+        B[Claude HUD] --> B1[状态栏]
+        B --> B2[进度显示]
+        B --> B3[成本追踪]
+
+        C[Superpowers] --> C1[增强技能]
+        C --> C2[社区工作流]
+
+        D[Claude 中文] --> D1[界面汉化]
+        D --> D2[中文提示]
+
+        E[Claude Mem] --> E1[记忆持久化]
+        E --> E2[上下文管理]
+    end
+
+    subgraph "插件来源"
+        F[GitHub 仓库]
+        F --> G[affaan-m/ECC]
+        F --> H[jarrodwatts/claude-hud]
+        F --> I[obra/superpowers-marketplace]
+        F --> J[anthropics/claude-plugins-official]
+        F --> K[thedotmack/claude-mem]
+    end
+
+    G --> A
+    H --> B
+    I --> C
+    J --> D
+    K --> E
+
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e9
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+```
+
+## 🎯 核心配置说明
+
+### 配置层级
+
+```mermaid
+graph TB
+    A[用户配置 - 最高优先级] --> B[插件配置 - 补充层]
+    B --> C[合并后生效]
+
+    A --> A1[CLAUDE.md - 全局指令]
+    A --> A2[SOUL.md - 人格配置]
+    A --> A3[AGENTS.md - 行为守则]
+    A --> A4[USER.md - 用户配置]
+    A --> A5[rules/ - 分层规则]
+
+    B --> B1[ECC - Agent + Skills]
+    B --> B2[Claude HUD - 状态栏]
+    B --> B3[Superpowers - 增强]
+
+    style A fill:#c8e6c9
+    style B fill:#e3f2fd
+    style C fill:#fff9c4
+```
+
+### SOUL.md - 人格配置
+
+| 领域 | 覆盖方向 |
+|------|----------|
+| **MCU 架构** | ARM Cortex（core 寄存器、中断异常、内存架构）、STM32 HAL/SPL |
+| **外设驱动** | ADC、DAC、DMA、Timer、Watchdog、CRC、RTC、Flash、SRAM |
+| **总线协议** | I²C、SPI、CAN、UART、USB |
+| **无线通信** | BLE、WiFi、LoRa、GPS、Cellular、MQTT |
+| **RTOS** | FreeRTOS 模块、RTOS 调试与优化 |
+| **工具链** | CMake、IAR、Keil、ESP-IDF、PlatformIO |
 
 ### AGENTS.md - 行为守则
 
-定义了 Agent 的权限等级、文件操作边界、通信协议和安全约束。
-
-### rules/ - 分层规则
-
-| 规则目录 | 用途 |
+| 权限等级 | 行为 |
 |----------|------|
-| `security/` | 安全规则（密钥管理、MCP 安全、权限配置） |
-| `workflow/` | 工作流编写规则 |
-| `embedded/` | 嵌入式开发专属约束 |
-| `privacy/` | 数据隐私与脱敏规则 |
-| `ecc/` | ECC（Evolved Constitutional AI）规则 |
+| 🟢 **自动** | 读、查、问（不需要确认） |
+| 🟡 **确认** | 写、改、删、执行（先问再干） |
+| 🔴 **必须批准** | 不可逆操作（git push、rm -rf 等） |
 
-### agents/ - 专用 Agent
+## 🔒 安全说明
 
-| Agent | 用途 |
-|-------|------|
-| `code-reviewer` | 代码质量审查 |
-| `devops` | 部署与运维 |
-| `embedded-expert` | 嵌入式开发专家 |
-| `test-runner` | 测试执行与分析 |
+```mermaid
+graph TB
+    A[安全检查清单] --> B[API Key / Token]
+    A --> C[密码]
+    A --> D[私钥]
+    A --> E[内网 IP]
+    A --> F[个人身份信息]
 
-## 安全说明
+    G[settings.json] --> H[已脱敏<br/>API Key 替换为占位符]
+
+    I[建议] --> J[设为私有仓库]
+    I --> K[不要提交敏感信息]
+    I --> L[使用环境变量]
+
+    style A fill:#ffebee
+    style G fill:#e8f5e9
+    style I fill:#fff3e0
+```
 
 ⚠️ **重要安全提示**
 
@@ -108,23 +271,35 @@ claude
 2. **不要提交敏感信息** - `.env.secrets`、API Key 等不要上传到公开仓库
 3. **私有仓库建议** - 建议将此仓库设为私有
 
-### 敏感信息检查清单
+## 📚 相关文档
 
-- [ ] API Key / Token
-- [ ] 密码
-- [ ] 私钥
-- [ ] 内网 IP 地址
-- [ ] 个人身份信息
+| 文档 | 说明 |
+|------|------|
+| [INSTALL.md](INSTALL.md) | 完整安装指南 |
+| [PLUGINS.md](PLUGINS.md) | 插件安装指南（含 GitHub 链接） |
+| [CONFIG-ARCHITECTURE.md](CONFIG-ARCHITECTURE.md) | 配置架构详解 |
 
-## 更新日志
+## 📦 相关仓库
+
+| 仓库 | 内容 | 地址 |
+|------|------|------|
+| **shuai-yemao-chip** | 核心配置 | https://github.com/shuai-yemao/shuai-yemao-chip |
+| **shuai-yemao-chip-skills** | 技能包（85+） | https://github.com/shuai-yemao/shuai-yemao-chip-skills |
+| **shuai-yemao-workflow** | 工作流（15+） | https://github.com/shuai-yemao/shuai-yemao-workflow |
+
+## 📋 更新日志
 
 ### 2026-06-24
 
-- 初始版本
-- 包含完整的 Claude Code 配置
-- 添加安装指南
-- 集成 skills 和 workflows 仓库
+- ✅ 初始版本
+- ✅ 核心配置（CLAUDE.md / SOUL.md / AGENTS.md / USER.md）
+- ✅ 规则体系（security / workflow / embedded / privacy / ecc）
+- ✅ Agent 定义（code-reviewer / devops / embedded-expert / test-runner）
+- ✅ 参考文档（EMBEDDED.md / SECURITY.md / WORKFLOWS.md）
+- ✅ 插件配置（ECC / HUD / Superpowers / 中文 / Mem）
+- ✅ 安装脚本（install.sh / install-plugins.sh）
+- ✅ 完整文档（README / INSTALL / PLUGINS / CONFIG-ARCHITECTURE）
 
-## 许可证
+## 📄 许可证
 
 MIT License
