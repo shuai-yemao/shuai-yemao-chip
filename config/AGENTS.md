@@ -1,188 +1,172 @@
-# Agents — AI 行为守则
+# Everything Claude Code (ECC) — Agent Instructions
 
-## 权限等级
+This is a **production-ready AI coding plugin** providing 67 specialized agents, 271 skills, 92 commands, and automated hook workflows for software development.
 
-| 等级 | 行为 |
-|------|------|
-| 🟢 **自动** | 读、查、问（不需要确认） |
-| 🟡 **确认** | 写、改、删、执行（先问再干） |
-| 🔴 **必须你批准** | 不可逆操作（git push、rm -rf、API key 操作等） |
+**Version:** 2.0.0
 
-## 文件操作边界
+## Core Principles
 
-| 路径 | 读 | 写 | 删 | 执行 |
-|------|:--:|:--:|:--:|:--:|
-| `*.md`（项目根） | 🟢 | 🟡 | 🔴 | — |
-| `.claude/` | 🟢 | 🟡 | 🔴 | — |
-| `skills/` | 🟢 | 🟡 | 🔴 | — |
-| `tool-layer/` | 🟢 | 🟡 | 🔴 | — |
-| `ops-layer/` | 🟢 | 🟡 | 🔴 | — |
-| `backups/` | 🟢 | 🟡 | 🔴 | — |
-| `bin/` | 🟢 | 🟡 | 🔴 | 🟡 |
-| `docs/` | 🟢 | 🟡 | 🔴 | — |
-| `.env*` | 🔴 | 🔴 | 🔴 | — |
-| `.git/` | 🔴 | 🔴 | 🔴 | 🔴 |
-| `build/`、`dist/`、`node_modules/` | 🟢 | 🔴 | 🔴 | — |
-| `~/.ssh/` | 🔴 | 🔴 | 🔴 | 🔴 |
-| 系统目录 | 🔴 | 🔴 | 🔴 | 🔴 |
+1. **Agent-First** — Delegate to specialized agents for domain tasks
+2. **Test-Driven** — Write tests before implementation, 80%+ coverage required
+3. **Security-First** — Never compromise on security; validate all inputs
+4. **Immutability** — Always create new objects, never mutate existing ones
+5. **Plan Before Execute** — Plan complex features before writing code
 
-## 通信协议
+## Available Agents
 
-- **Human-in-the-loop**：关键决策前必须问
-- **状态透明**：当前在 Alignment Flow 哪个 Step 要说清楚
-- **技能调度**：引用现有技能，不重复造轮子
-- **失败上报**：执行失败时给出原因和建议修复方向
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| planner | Implementation planning | Complex features, refactoring |
+| architect | System design and scalability | Architectural decisions |
+| tdd-guide | Test-driven development | New features, bug fixes |
+| code-reviewer | Code quality and maintainability | After writing/modifying code |
+| security-reviewer | Vulnerability detection | Before commits, sensitive code |
+| spec-miner | Brownfield spec extraction | Onboarding brownfield projects to spec-driven development |
+| build-error-resolver | Fix build/type errors | When build fails |
+| e2e-runner | End-to-end Playwright testing | Critical user flows |
+| refactor-cleaner | Dead code cleanup | Code maintenance |
+| doc-updater | Documentation and codemaps | Updating docs |
+| cpp-reviewer | C/C++ code review | C and C++ projects |
+| cpp-build-resolver | C/C++ build errors | C and C++ build failures |
+| fsharp-reviewer | F# functional code review | F# projects |
+| docs-lookup | Documentation lookup via Context7 | API/docs questions |
+| go-reviewer | Go code review | Go projects |
+| go-build-resolver | Go build errors | Go build failures |
+| kotlin-reviewer | Kotlin code review | Kotlin/Android/KMP projects |
+| kotlin-build-resolver | Kotlin/Gradle build errors | Kotlin build failures |
+| database-reviewer | PostgreSQL/Supabase specialist | Schema design, query optimization |
+| python-reviewer | Python code review | Python projects |
+| django-reviewer | Django code review | Django apps, DRF APIs, ORM, migrations |
+| django-build-resolver | Django build, migration, and setup errors | Django startup, dependency, migration, collectstatic failures |
+| java-reviewer | Java and Spring Boot code review | Java/Spring Boot projects |
+| java-build-resolver | Java/Maven/Gradle build errors | Java build failures |
+| loop-operator | Autonomous loop execution | Run loops safely, monitor stalls, intervene |
+| harness-optimizer | Harness config tuning | Reliability, cost, throughput |
+| rust-reviewer | Rust code review | Rust projects |
+| rust-build-resolver | Rust build errors | Rust build failures |
+| pytorch-build-resolver | PyTorch runtime/CUDA/training errors | PyTorch build/training failures |
+| mle-reviewer | Production ML pipeline review | ML pipelines, evals, serving, monitoring, rollback |
+| typescript-reviewer | TypeScript/JavaScript code review | TypeScript/JavaScript projects |
 
-## 通用约束
+## Agent Orchestration
 
-- 不修改 `~/.claude/CLAUDE.md` 以外的全局配置
-- 不改 `.git/`、`.env` 文件
-- 不自动安装系统级依赖
-- 不自动执行 git push（需确认）
+Use agents proactively without user prompt:
+- Complex feature requests → **planner**
+- Code just written/modified → **code-reviewer**
+- Bug fix or new feature → **tdd-guide**
+- Architectural decision → **architect**
+- Security-sensitive code → **security-reviewer**
+- Brownfield project onboarding → **spec-miner**
+- Autonomous loops / loop monitoring → **loop-operator**
+- Harness config reliability and cost → **harness-optimizer**
 
-## Ops 层专属约束
+Use parallel execution for independent operations — launch multiple agents simultaneously.
 
-- restore/deploy 必须先 dry-run
-- 不备份/传输 .env.secrets 明文
-- 不覆盖远程已有 skills/ 内容
-- prune 保留至少最近 1 个备份
-- doctor 自动修复仅限安全操作（chmod、重建索引）
-- 分发包不包含 history.jsonl
+## Security Guidelines
 
-## 工具层专属约束
+**Before ANY commit:**
+- No hardcoded secrets (API keys, passwords, tokens)
+- All user inputs validated
+- SQL injection prevention (parameterized queries)
+- XSS prevention (sanitized HTML)
+- CSRF protection enabled
+- Authentication/authorization verified
+- Rate limiting on all endpoints
+- Error messages don't leak sensitive data
 
-- 不静默升级技能 — 更新必须先显示 diff
-- 卸载前检查反向依赖
-- 安装来源验证 — 仅接受已知可靠来源
-- 不破坏 skills 目录结构
+**Secret management:** NEVER hardcode secrets. Use environment variables or a secret manager. Validate required secrets at startup. Rotate any exposed secrets immediately.
 
-## 高危操作确认
+**If security issue found:** STOP → use security-reviewer agent → fix CRITICAL issues → rotate exposed secrets → review codebase for similar issues.
 
-### 文件删除
+## Coding Style
 
-| 操作 | 确认要求 |
-|------|----------|
-| 删除单个文件 | 明确文件路径 + 理由 |
-| 批量删除 | 列出删除清单 + 总数 + 理由 |
-| 递归删除目录 | 目录内容概览 + 影响范围 |
+**Immutability (CRITICAL):** Always create new objects, never mutate. Return new copies with changes applied.
 
-### 工具层操作
+**File organization:** Many small files over few large ones. 200-400 lines typical, 800 max. Organize by feature/domain, not by type. High cohesion, low coupling.
 
-| 操作 | 确认要求 |
-|------|----------|
-| 安装技能 | 来源 URL + 技能名 + 版本 + 依赖列表 |
-| 卸载技能 | 技能名 + 反向依赖检查结果 |
-| 更新技能 | 技能名 + 当前版本 → 目标版本 + diff 摘要 |
-| 强制卸载 | 技能名 + 被依赖列表 + 理由 |
+**Error handling:** Handle errors at every level. Provide user-friendly messages in UI code. Log detailed context server-side. Never silently swallow errors.
 
-### Ops 层操作
+**Input validation:** Validate all user input at system boundaries. Use schema-based validation. Fail fast with clear messages. Never trust external data.
 
-| 操作 | 确认要求 |
-|------|----------|
-| 全量备份 | 备份范围清单 + 排除项 + 预估大小 |
-| 恢复备份 | 备份路径 + 文件清单 + dry-run（必须先行） |
-| 打包分发 | 包含内容清单 + 排除项 + 是否含敏感信息 |
-| 远程部署 | 目标地址 + 传输文件清单 + 远程执行命令 |
-| 清理数据 | 清理范围 + 保留天数 + 预估释放空间 |
+**Code quality checklist:**
+- Functions small (<50 lines), files focused (<800 lines)
+- No deep nesting (>4 levels)
+- Proper error handling, no hardcoded values
+- Readable, well-named identifiers
 
-### 系统命令
+## Testing Requirements
 
-| 操作 | 确认要求 |
-|------|----------|
-| 安装/卸载软件包 | 包名 + 版本 + 来源 |
-| 修改系统配置 | 配置项 + 原值 + 目标值 |
-| 执行网络操作 | 目标地址 + 操作类型 + 数据方向 |
-| 操作外部进程 | 进程名 + 操作（kill/restart） |
+**Minimum coverage: 80%**
 
-### API 调用
+Test types (all required):
+1. **Unit tests** — Individual functions, utilities, components
+2. **Integration tests** — API endpoints, database operations
+3. **E2E tests** — Critical user flows
 
-| 操作 | 确认要求 |
-|------|----------|
-| 第三方 API | 端点 URL + 请求方法 + 发送的数据字段 |
-| 携带认证的请求 | 凭据类型 + 权限范围 |
-| 写操作 API | 操作对象 + 数据内容 + 可回滚性 |
-| 批量 API | 调用次数 + 频率 + 总数据量 |
+**TDD workflow (mandatory):**
+1. Write test first (RED) — test should FAIL
+2. Write minimal implementation (GREEN) — test should PASS
+3. Refactor (IMPROVE) — verify coverage 80%+
 
-## 命令黑名单
+Troubleshoot failures: check test isolation → verify mocks → fix implementation (not tests, unless tests are wrong).
 
-| 命令 | 禁止原因 |
-|------|----------|
-| `rm -rf /`、`rm -rf /*` | 破坏性删除 |
-| `dd` 直接写块设备 | 可能破坏磁盘/分区 |
-| `chmod -R 777` | 权限过于开放 |
-| `> /dev/sda` 等 | 设备破坏 |
-| `curl ... \| bash` | 未经审查的远程执行 |
+## Development Workflow
 
-## 网络访问
+1. **Plan** — Use planner agent, identify dependencies and risks, break into phases
+2. **TDD** — Use tdd-guide agent, write tests first, implement, refactor
+3. **Review** — Use code-reviewer agent immediately, address CRITICAL/HIGH issues
+4. **Capture knowledge in the right place**
+   - Personal debugging notes, preferences, and temporary context → auto memory
+   - Team/project knowledge (architecture decisions, API changes, runbooks) → the project's existing docs structure
+   - If the current task already produces the relevant docs or code comments, do not duplicate the same information elsewhere
+   - If there is no obvious project doc location, ask before creating a new top-level file
+5. **Commit** — Conventional commits format, comprehensive PR summaries
 
-- **允许**：GitHub、GitLab、文档站点、包注册表
-- **需确认**：未在白名单中的域名、内部服务、生产环境 API
-- **禁止**：明文传输凭据、向未知端点发送代码/数据
+## Workflow Surface Policy
 
-## 资源限制
+- `skills/` is the canonical workflow surface.
+- New workflow contributions should land in `skills/` first.
+- `commands/` is a legacy slash-entry compatibility surface and should only be added or updated when a shim is still required for migration or cross-harness parity.
 
-| 限制项 | 上限 |
-|--------|:----:|
-| 并发任务数 | 4 |
-| 单步执行超时 | 300s |
-| 文件写入大小 | 10MB |
-| 批量操作数 | 50 |
+## Git Workflow
 
-## 隐私保护
+**Commit format:** `<type>: <description>` — Types: feat, fix, refactor, docs, test, chore, perf, ci
 
-### 敏感信息过滤
+**PR workflow:** Analyze full commit history → draft comprehensive summary → include test plan → push with `-u` flag.
 
-以下内容在输出和日志中必须自动屏蔽或脱敏：
-- API Key、Token、密码、私钥
-- 连接字符串中的凭据部分
-- 个人身份信息（邮箱、电话、地址）
-- 内网 IP / 非公开域名
+## Architecture Patterns
 
-### 脱敏规则
+**API response format:** Consistent envelope with success indicator, data payload, error message, and pagination metadata.
 
-| 数据类型 | 脱敏方式 | 示例 |
-|----------|----------|------|
-| API Key | 保留首 4 位 + `****` | `sk-abc****` |
-| 密码 | 完全替换 | `******` |
-| 邮箱 | 首字 + `***@` + 域名 | `z***@example.com` |
-| 内网 IP | 保留前两段 | `192.168.*.*` |
+**Repository pattern:** Encapsulate data access behind standard interface (findAll, findById, create, update, delete). Business logic depends on abstract interface, not storage mechanism.
 
-## 审计与异常检测
+**Skeleton projects:** Search for battle-tested templates, evaluate with parallel agents (security, extensibility, relevance), clone best match, iterate within proven structure.
 
-### 审计项
+## Performance
 
-| 审计项 | 记录内容 |
-|--------|----------|
-| 高危操作 | 操作类型 + 时间 + 是否经确认 + 结果 |
-| 权限越界尝试 | 目标路径 + 操作 + 拒绝原因 |
-| 命令执行 | 完整命令 + exit code + 输出摘要 |
-| 文件变更 | 文件路径 + 操作类型 + 变更大小 |
+**Context management:** Avoid last 20% of context window for large refactoring and multi-file features. Lower-sensitivity tasks (single edits, docs, simple fixes) tolerate higher utilization.
 
-### 异常识别
+**Build troubleshooting:** Use build-error-resolver agent → analyze errors → fix incrementally → verify after each fix.
 
-- 高频高危操作
-- 权限试探（连续访问被禁止的路径）
-- 异常命令链
-- 信息外泄嫌疑
-- 规则漂移（同一类操作越来越频繁地跳过确认）
+## Project Structure
 
-## 专用 Agent 规范
+```
+agents/          — 67 specialized subagents
+skills/          — 271 workflow skills and domain knowledge
+commands/        — 92 slash commands
+hooks/           — Trigger-based automations
+rules/           — Always-follow guidelines (common + per-language)
+scripts/         — Cross-platform Node.js utilities
+mcp-configs/     — 14 MCP server configurations
+tests/           — Test suite
+```
 
-| Agent | 允许操作 | 禁止操作 |
-|-------|---------|---------|
-| `embedded-expert` | 读写源码、调用嵌入式技能、执行构建 | 修改 HAL 库、烧录未经验证固件 |
-| `frontend-expert` | 读写前端源码、调用前端技能、执行构建 | 修改框架核心配置（需确认）、删除组件 |
-| `code-reviewer` | 读取代码、调用安全层预检、生成报告 | 直接修改代码 |
-| `test-runner` | 运行测试、读取输出、分析结果 | 修改测试文件 |
-| `devops` | 健康检查、备份、打包、诊断 | 恢复/部署（需确认） |
+`commands/` remains in the repo for compatibility, but the long-term direction is skills-first.
 
-## 安全层集成
+## Success Metrics
 
-- **Phase 0.5 预检**: 任务输入 → preflight → allow/caution/block
-- **Phase 2.5 审计**: 任务完成 → audit → 记录到 audit log
-
-## 持续学习
-
-Homunculus 从会话历史自动学习编码模式。
-本能演进: 0.3 → 0.5 → 0.7 → 0.85（`>= 0.7` 桥接到记忆层）
-详见 `~/.claude/reference/SECURITY.md`
+- All tests pass with 80%+ coverage
+- No security vulnerabilities
+- Code is readable and maintainable
+- Performance is acceptable
+- User requirements are met
