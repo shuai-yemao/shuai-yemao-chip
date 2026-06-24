@@ -1,0 +1,121 @@
+{
+  "_comment": "Claude Code 设置文件 - 敏感信息已脱敏",
+  "_instructions": "复制此文件到 ~/.claude/settings.json 后，手动填入你的 API Key 和其他敏感信息",
+  "env": {
+    "ALL_PROXY": "socks5://127.0.0.1:7897",
+    "ANTHROPIC_AUTH_TOKEN": "YOUR_API_KEY_HERE",
+    "ANTHROPIC_BASE_URL": "https://api.anthropic.com",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-haiku-4-5-20251001",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-8",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-6",
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_EFFORT_LEVEL": "high",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "16000",
+    "CLAUDE_CODE_SKIP_FAST_MODE_NETWORK_ERRORS": "1",
+    "CLAUDE_CODE_SKIP_UPDATE_CHECK": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-haiku-4-5-20251001",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "EDITOR": "code --wait",
+    "LANG": "zh_CN.UTF-8",
+    "LC_ALL": "zh_CN.UTF-8",
+    "MAX_THINKING_TOKENS": "8000",
+    "PYTHONIOENCODING": "utf-8",
+    "SHELL": "C:\\Program Files\\Git\\bin\\bash.exe"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Edit(*)",
+      "Write(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "Bash(*)",
+      "MCP(*)",
+      "Agent(*)",
+      "Skill(*)",
+      "WebSearch",
+      "WebFetch",
+      "TaskCreate(*)",
+      "TaskUpdate(*)",
+      "TaskList(*)",
+      "TaskGet(*)",
+      "TaskOutput(*)",
+      "TaskStop(*)",
+      "SendMessage(*)",
+      "Monitor(*)",
+      "ScheduleWakeup(*)",
+      "CronCreate(*)",
+      "CronList(*)",
+      "CronDelete(*)"
+    ],
+    "defaultMode": "auto"
+  },
+  "hooks": {
+    "PostCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_CONFIG_DIR}/bin/homunculus-hook.js --action capture",
+            "timeout": 30,
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
+  "enableWorkflows": true,
+  "enabledPlugins": {
+    "claude-code-zh-cn": true,
+    "claude-hud@claude-hud": true,
+    "superpowers@superpowers-marketplace": true,
+    "ecc@ecc": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/affaan-m/ECC.git"
+      }
+    }
+  },
+  "language": "Chinese",
+  "spinnerTipsEnabled": true,
+  "effortLevel": "high",
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark-daltonized",
+  "mcpServers": {
+    "yemao050417": {
+      "type": "http",
+      "url": "https://mcp.smithery.run/yemao050417"
+    }
+  },
+  "skills": {
+    "directories": [
+      "C:/Users/YOUR_USERNAME/.claude/skills",
+      "C:\\Users\\YOUR_USERNAME\\.claude\\skills"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+# Model Switch 包装脚本
+# 将此文件放到 PATH 中的目录，即可直接使用 model-switch 命令
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec bash "${SCRIPT_DIR}/model-switch.sh" "$@"

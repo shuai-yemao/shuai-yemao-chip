@@ -1,0 +1,45 @@
+{
+  "current": "mimo-pro",
+  "configs": {
+    "mimo": {
+      "description": "小米 mimo-v2.5 (日常使用)",
+      "ANTHROPIC_BASE_URL": "https://api.xiaomimimo.com/anthropic",
+      "ANTHROPIC_AUTH_TOKEN": "sk-ce74q8orcweewi0qcxc967e3wr42vv8ajo7oswf37sps355v",
+      "ANTHROPIC_MODEL": "mimo-v2.5",
+      "ANTHROPIC_DEFAULT_HAIKU_MODEL": "mimo-v2.5",
+      "ANTHROPIC_DEFAULT_SONNET_MODEL": "mimo-v2.5",
+      "ANTHROPIC_DEFAULT_OPUS_MODEL": "mimo-v2.5",
+      "CLAUDE_CODE_SUBAGENT_MODEL": "mimo-v2.5"
+    },
+    "mimo-pro": {
+      "description": "小米 mimo-v2.5-pro (复杂任务，1M上下文)",
+      "ANTHROPIC_BASE_URL": "https://api.xiaomimimo.com/anthropic",
+      "ANTHROPIC_AUTH_TOKEN": "sk-ce74q8orcweewi0qcxc967e3wr42vv8ajo7oswf37sps355v",
+      "ANTHROPIC_MODEL": "mimo-v2.5-pro",
+      "ANTHROPIC_DEFAULT_HAIKU_MODEL": "mimo-v2.5-pro",
+      "ANTHROPIC_DEFAULT_SONNET_MODEL": "mimo-v2.5-pro",
+      "ANTHROPIC_DEFAULT_OPUS_MODEL": "mimo-v2.5-pro",
+      "CLAUDE_CODE_SUBAGENT_MODEL": "mimo-v2.5-pro"
+    },
+    "deepseek": {
+      "description": "DeepSeek v4 (备选方案)",
+      "ANTHROPIC_BASE_URL": "https://api.deepseek.com/anthropic",
+      "ANTHROPIC_AUTH_TOKEN": "sk-a8f62be7d62d453d9bb323bf649916cb",
+      "ANTHROPIC_MODEL": "deepseek-v4-pro",
+      "ANTHROPIC_DEFAULT_HAIKU_MODEL": "deepseek-v4-flash",
+      "ANTHROPIC_DEFAULT_SONNET_MODEL": "deepseek-v4-pro",
+      "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-v4-pro",
+      "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-v4-flash"
+    },
+    "mimo-deepseek": {
+      "description": "混合模式 (mimo主 + deepseek子代理)",
+      "ANTHROPIC_BASE_URL": "https://api.xiaomimimo.com/anthropic",
+      "ANTHROPIC_AUTH_TOKEN": "sk-ce74q8orcweewi0qcxc967e3wr42vv8ajo7oswf37sps355v",
+      "ANTHROPIC_MODEL": "mimo-v2.5-pro",
+      "ANTHROPIC_DEFAULT_HAIKU_MODEL": "mimo-v2.5",
+      "ANTHROPIC_DEFAULT_SONNET_MODEL": "mimo-v2.5-pro",
+      "ANTHROPIC_DEFAULT_OPUS_MODEL": "mimo-v2.5-pro",
+      "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-v4-flash"
+    }
+  }
+}
