@@ -34,12 +34,13 @@ graph TB
         Q --> T[Superpowers<br/>增强功能]
         Q --> U[Claude 中文<br/>汉化]
         Q --> V[Claude Mem<br/>记忆管理]
+        Q --> W[Understand-Anything<br/>知识图谱]
     end
 
-    B --> W[Agent-First<br/>Test-Driven<br/>Security-First]
-    C --> X[67 Agent + 安全指南<br/>+ 编码风格 + 测试要求]
-    J --> Y[ECC 标准规则]
-    R --> Z[Agent 编排 + 工作流]
+    B --> X[Agent-First<br/>Test-Driven<br/>Security-First]
+    C --> Y[67 Agent + 安全指南<br/>+ 编码风格 + 测试要求]
+    J --> Z[ECC 标准规则]
+    R --> AA[Agent 编排 + 工作流]
 ```
 
 ## 📦 仓库关系
@@ -49,7 +50,7 @@ graph LR
     A[shuai-yemao-chip<br/>核心配置] --> B[shuai-yemao-chip-skills<br/>技能包]
     A --> C[shuai-yemao-workflow<br/>工作流]
 
-    B --> D[85+ 技能]
+    B --> D[142 技能]
     C --> E[15+ 核心工作流]
 
     A --> F[ECC 配置<br/>CLAUDE.md / SOUL.md / AGENTS.md]
@@ -76,6 +77,11 @@ cd ~/shuai-yemao-chip
 
 # 安装插件
 ./scripts/install-plugins.sh
+
+# 安装 Understand-Anything（知识图谱）
+git clone https://github.com/Lum1104/Understand-Anything.git ~/.claude/plugins/marketplaces/Understand-Anything
+cd ~/.claude/plugins/marketplaces/Understand-Anything
+./install.sh claude
 
 # 配置 API Key
 vim ~/.claude/settings.json
@@ -173,28 +179,35 @@ graph TB
 
         E[Claude Mem] --> E1[记忆持久化]
         E --> E2[上下文管理]
+
+        F[Understand-Anything] --> F1[知识图谱]
+        F --> F2[代码分析]
+        F --> F3[可视化仪表板]
     end
 
     subgraph "插件来源"
-        F[GitHub 仓库]
-        F --> G[affaan-m/ECC]
-        F --> H[jarrodwatts/claude-hud]
-        F --> I[obra/superpowers-marketplace]
-        F --> J[anthropics/claude-plugins-official]
-        F --> K[thedotmack/claude-mem]
+        G[GitHub 仓库]
+        G --> H[affaan-m/ECC]
+        G --> I[jarrodwatts/claude-hud]
+        G --> J[obra/superpowers-marketplace]
+        G --> K[anthropics/claude-plugins-official]
+        G --> L[thedotmack/claude-mem]
+        G --> M[Lum1104/Understand-Anything]
     end
 
-    G --> A
-    H --> B
-    I --> C
-    J --> D
-    K --> E
+    H --> A
+    I --> B
+    J --> C
+    K --> D
+    L --> E
+    M --> F
 
     style A fill:#e1f5fe
     style B fill:#f3e5f5
     style C fill:#e8f5e9
     style D fill:#fff3e0
     style E fill:#fce4ec
+    style F fill:#e0f7fa
 ```
 
 ## 🎯 核心配置说明
@@ -320,7 +333,7 @@ graph TB
 | 仓库 | 内容 | 地址 |
 |------|------|------|
 | **shuai-yemao-chip** | 核心配置 | https://github.com/shuai-yemao/shuai-yemao-chip |
-| **shuai-yemao-chip-skills** | 技能包（85+） | https://github.com/shuai-yemao/shuai-yemao-chip-skills |
+| **shuai-yemao-chip-skills** | 技能包（142） | https://github.com/shuai-yemao/shuai-yemao-chip-skills |
 | **shuai-yemao-workflow** | 工作流（15+） | https://github.com/shuai-yemao/shuai-yemao-workflow |
 
 ## 📋 更新日志
@@ -331,10 +344,12 @@ graph TB
 - ✅ 核心配置采用 ECC 标准（CLAUDE.md / SOUL.md / AGENTS.md / USER.md）
 - ✅ 规则体系（security / workflow / embedded / privacy / ecc）
 - ✅ 参考文档（EMBEDDED.md / SECURITY.md / WORKFLOWS.md）
-- ✅ 插件配置（ECC / HUD / Superpowers / 中文 / Mem）
+- ✅ 插件配置（ECC / HUD / Superpowers / 中文 / Mem / Understand-Anything）
 - ✅ 安装脚本（install.sh / install-plugins.sh）
 - ✅ 完整文档（README / INSTALL / PLUGINS / CONFIG-ARCHITECTURE）
 - ✅ README 使用 Mermaid 图表可视化架构
+- ✅ 添加 Understand-Anything 知识图谱插件
+- ✅ 更新技能包数量：142 个技能
 
 ## 📄 许可证
 

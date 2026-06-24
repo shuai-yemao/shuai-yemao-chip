@@ -11,6 +11,7 @@
 | **Superpowers** | 增强功能和技能 | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | **Claude Code 中文** | 界面汉化 | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) |
 | **Claude Mem** | 记忆管理 | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) |
+| **Understand-Anything** | 知识图谱 - 代码分析和可视化 | [Lum1104/Understand-Anything](https://github.com/Lum1104/Understand-Anything) |
 
 ---
 
@@ -130,6 +131,46 @@ git clone https://github.com/thedotmack/claude-mem.git ~/.claude/plugins/marketp
 
 ---
 
+### 6. Understand-Anything - 知识图谱
+
+**GitHub**: https://github.com/Lum1104/Understand-Anything
+
+**功能**:
+- 代码库分析和知识图谱构建
+- 交互式可视化仪表板
+- 智能搜索（按名称或语义）
+- 差异影响分析
+- 新人入职指南生成
+- 业务领域知识提取
+
+**安装**:
+```bash
+# 启动 Claude Code 后运行
+/plugin marketplace add Egonex-AI/Understand-Anything
+/plugin install understand-anything
+
+# 或手动克隆
+git clone https://github.com/Lum1104/Understand-Anything.git ~/.claude/plugins/marketplaces/Understand-Anything
+cd ~/.claude/plugins/marketplaces/Understand-Anything
+./install.sh claude
+```
+
+**使用命令**:
+| 命令 | 功能 |
+|------|------|
+| `/understand` | 分析项目，构建知识图谱 |
+| `/understand-dashboard` | 打开交互式可视化仪表板 |
+| `/understand-chat` | 向代码库提问 |
+| `/understand-diff` | 分析当前更改的影响 |
+| `/understand-explain <file>` | 解释特定文件 |
+| `/understand-domain` | 提取业务领域知识 |
+| `/understand-knowledge` | 分析知识库 |
+| `/understand-onboard` | 生成新人入职指南 |
+
+**配置**: 安装后自动生效。
+
+---
+
 ## 一键安装脚本
 
 将以下内容保存为 `install-plugins.sh` 并运行：
@@ -194,6 +235,17 @@ else
     echo "✓ Claude Mem 已存在，跳过"
 fi
 
+# 6. Understand-Anything
+echo "安装 Understand-Anything..."
+if [ ! -d "$MARKETPLACES_DIR/Understand-Anything" ]; then
+    git clone https://github.com/Lum1104/Understand-Anything.git "$MARKETPLACES_DIR/Understand-Anything"
+    cd "$MARKETPLACES_DIR/Understand-Anything"
+    ./install.sh claude
+    echo "✓ Understand-Anything 安装完成"
+else
+    echo "✓ Understand-Anything 已存在，跳过"
+fi
+
 echo ""
 echo "插件安装完成！"
 echo "请重启 Claude Code 以加载插件。"
@@ -236,7 +288,8 @@ claude
     "claude-code-zh-cn": true,
     "claude-hud@claude-hud": true,
     "superpowers@superpowers-marketplace": true,
-    "ecc@ecc": true
+    "ecc@ecc": true,
+    "understand-anything@Understand-Anything": true
   }
 }
 ```
@@ -300,3 +353,4 @@ A: 删除插件目录，然后从 `settings.json` 中移除相关配置。
 | ECC 文档 | https://github.com/affaan-m/ECC#readme |
 | Claude HUD 文档 | https://github.com/jarrodwatts/claude-hud#readme |
 | Superpowers 文档 | https://github.com/obra/superpowers-marketplace#readme |
+| Understand-Anything 文档 | https://github.com/Lum1104/Understand-Anything#readme |
