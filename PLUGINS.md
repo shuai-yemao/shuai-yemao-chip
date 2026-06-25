@@ -6,7 +6,7 @@
 
 | 插件 | 用途 | GitHub 仓库 |
 |------|------|-------------|
-| **ECC** | 核心插件 - 67 Agent + 271 Skills + 92 Commands | [affaan-m/ECC](https://github.com/affaan-m/ECC) |
+| **ECC** | 核心插件 - 79 Agent + 271 Skills + 92 Commands | [affaan-m/ECC](https://github.com/affaan-m/ECC) |
 | **Claude HUD** | 状态栏和进度显示 | [jarrodwatts/claude-hud](https://github.com/jarrodwatts/claude-hud) |
 | **Superpowers** | 增强功能和技能 | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | **Claude Code 中文** | 界面汉化 | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) |
@@ -22,7 +22,7 @@
 **GitHub**: https://github.com/affaan-m/ECC
 
 **功能**:
-- 67 个专业 Agent（planner、architect、tdd-guide、code-reviewer 等）
+- 79 个专业 Agent（planner、architect、tdd-guide、code-reviewer 等）
 - 271 个技能（工作流、领域知识）
 - 92 个命令（/tdd、/plan、/e2e 等）
 - 自动化 Hook 工作流

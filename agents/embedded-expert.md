@@ -34,8 +34,8 @@ tools: [Read, Edit, Write, Bash, Grep, Glob, Agent, Skill, WebSearch, WebFetch]
 ## 技能包参考
 优先使用以下技能包：
 - `i2c-bus` / `spi-bus` / `uart-module` — 通信协议
-- `timer-module` / `pwm-module` — 定时器/PWM
-- `adc-module` / `gpio-module` — 模拟/数字 IO
+- `timer-module` — 定时器/PWM
+- `adc-module` / `dma-module` — 模拟/数字 IO
 - `stm32-hal-development` — HAL 开发模板
 - `build-platformio` / `build-cmake` — 构建系统
 - `flash-openocd` / `flash-jlink` — 烧录工具

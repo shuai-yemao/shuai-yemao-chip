@@ -21,7 +21,7 @@ graph TB
     end
 
     subgraph "Agent 系统"
-        K[67 专业 Agent] --> L[planner<br/>实现规划]
+        K[79 专业 Agent] --> L[planner<br/>实现规划]
         K --> M[architect<br/>系统设计]
         K --> N[code-reviewer<br/>代码审查]
         K --> O[security-reviewer<br/>安全检测]
@@ -29,7 +29,7 @@ graph TB
     end
 
     subgraph "插件系统"
-        Q[plugins/] --> R[ECC<br/>67 Agent + 271 Skills]
+        Q[plugins/] --> R[ECC<br/>79 Agent + 271 Skills]
         Q --> S[Claude HUD<br/>状态栏]
         Q --> T[Superpowers<br/>增强功能]
         Q --> U[Claude 中文<br/>汉化]
@@ -38,7 +38,7 @@ graph TB
     end
 
     B --> X[Agent-First<br/>Test-Driven<br/>Security-First]
-    C --> Y[67 Agent + 安全指南<br/>+ 编码风格 + 测试要求]
+    C --> Y[79 Agent + 安全指南<br/>+ 编码风格 + 测试要求]
     J --> Z[ECC 标准规则]
     R --> AA[Agent 编排 + 工作流]
 ```
@@ -129,7 +129,7 @@ graph TB
     subgraph "shuai-yemao-chip"
         A[config/] --> A1[CLAUDE.md<br/>ECC 全局指令]
         A --> A2[SOUL.md<br/>ECC 核心身份]
-        A --> A3[AGENTS.md<br/>ECC 67 Agent 指令]
+        A --> A3[AGENTS.md<br/>ECC 79 Agent 指令]
         A --> A4[USER.md<br/>用户配置]
         A --> A5[settings.json<br/>已脱敏]
 
@@ -163,7 +163,7 @@ graph TB
 ```mermaid
 graph TB
     subgraph "已安装插件"
-        A[ECC] --> A1[67 Agent]
+        A[ECC] --> A1[79 Agent]
         A --> A2[271 Skills]
         A --> A3[92 Commands]
 
@@ -397,7 +397,7 @@ ECC 的核心身份和原则：
 
 ### AGENTS.md - Agent 指令
 
-ECC v2.0.0 提供 **67 个专业 Agent**：
+ECC v2.0.0 提供 **79 个专业 Agent**：
 
 | Agent 类别 | 代表 Agent | 用途 |
 |------------|-----------|------|
@@ -475,6 +475,9 @@ graph TB
 
 ### 2026-06-25
 
+- ✅ 更新 Agent 数量：67 → 79（新增 embedded-expert、test-runner 等 12 个 Agent）
+- ✅ 同步所有 Agent 定义文件到仓库
+- ✅ 更新配置文件（AGENTS.md / SOUL.md / CLAUDE.md / USER.md）
 - ✅ 新增 MCP 服务器配置
   - Context7 MCP - 实时文档查询（resolve-library-id, query-docs）
   - DBHub MCP - 数据库连接（execute_sql, search_objects）
