@@ -210,6 +210,145 @@ graph TB
     style F fill:#e0f7fa
 ```
 
+## 🔗 MCP 服务器
+
+```mermaid
+graph TB
+    subgraph "已配置 MCP 服务器"
+        A[Context7] --> A1[实时文档查询]
+        A --> A2[库 ID 解析]
+        A --> A3[代码示例获取]
+
+        B[DBHub] --> B1[数据库连接]
+        B --> B2[SQL 执行]
+        B --> B3[数据库对象搜索]
+
+        C[yemao050417] --> C1[自定义 MCP]
+        C --> C2[HTTP 传输]
+    end
+
+    subgraph "支持的数据库"
+        D[SQLite] --> D1[轻量级嵌入式]
+        E[PostgreSQL] --> E1[功能强大]
+        F[MySQL] --> F1[流行开源]
+        G[SQL Server] --> G1[企业级]
+    end
+
+    B --> D
+    B --> E
+    B --> F
+    B --> G
+
+    style A fill:#e8f5e9
+    style B fill:#e3f2fd
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e1f5fe
+    style F fill:#fce4ec
+    style G fill:#e0f7fa
+```
+
+### MCP 配置
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "pnpm",
+      "args": ["dlx", "@upstash/context7-mcp@latest"]
+    },
+    "dbhub": {
+      "command": "pnpm",
+      "args": ["dlx", "@bytebase/dbhub@latest", "--transport", "stdio"]
+    }
+  }
+}
+```
+
+**Context7 MCP** - 实时文档查询
+- `resolve-library-id`: 解析库 ID，获取最新的库文档
+- `query-docs`: 查询特定库的文档和代码示例
+- 支持任何编程库和框架
+
+**DBHub MCP** - 数据库连接
+- `execute_sql`: 执行 SQL 查询，支持事务和安全控制
+- `search_objects`: 搜索和探索数据库结构
+- 支持 SQLite, PostgreSQL, MySQL, SQL Server, MariaDB
+
+## 🦀 桌面宠物
+
+```mermaid
+graph TB
+    subgraph "Clawd on Desk"
+        A[像素螃蟹] --> A1[实时状态显示]
+        A --> A2[动画效果]
+        A --> A3[权限气泡]
+
+        B[支持的代理] --> B1[Claude Code]
+        B --> B2[Codex CLI]
+        B --> B3[Copilot CLI]
+        B --> B4[Gemini CLI]
+
+        C[功能特性] --> C1[12 种动画状态]
+        C --> C2[拖拽移动]
+        C --> C3[迷你模式]
+        C --> C4[免打扰模式]
+    end
+
+    subgraph "动画状态"
+        D[Idle] --> D1[空闲浮动]
+        E[Thinking] --> E1[思考旋转]
+        F[Typing] --> F1[打字动画]
+        G[Building] --> G1[建造动画]
+        H[Error] --> H1[错误动画]
+        I[Happy] --> I1[庆祝动画]
+    end
+
+    A1 --> D
+    A1 --> E
+    A1 --> F
+    A1 --> G
+    A1 --> H
+    A1 --> I
+
+    style A fill:#ffebee
+    style B fill:#e3f2fd
+    style C fill:#e8f5e9
+    style D fill:#f3e5f5
+    style E fill:#fff3e0
+    style F fill:#e1f5fe
+    style G fill:#fce4ec
+    style H fill:#e0f7fa
+    style I fill:#c8e6c9
+```
+
+### Clawd on Desk 功能
+
+| 功能 | 说明 |
+|------|------|
+| **实时状态感知** | 通过 Claude Code hooks 实时显示工作状态 |
+| **12 种动画状态** | idle, thinking, typing, building, error, happy 等 |
+| **权限气泡** | Claude Code 请求权限时弹出气泡提醒 |
+| **拖拽移动** | 可以拖拽到屏幕任意位置 |
+| **迷你模式** | 拖到屏幕边缘隐藏，鼠标悬停显示 |
+| **免打扰模式** | 右键菜单进入睡眠模式 |
+| **多代理支持** | Claude Code, Codex, Copilot, Gemini 等 |
+| **系统托盘** | 调整大小、语言切换、自动启动 |
+
+### 安装方式
+
+```bash
+# 下载安装包
+# 访问: https://github.com/rullerzhou-afk/clawd-on-desk/releases/latest
+# 下载: Clawd-on-Desk-Setup-*-x64.exe
+
+# 或从源码安装
+git clone https://github.com/rullerzhou-afk/clawd-on-desk.git
+cd clawd-on-desk
+npm install
+npm start
+```
+
 ## 🎯 核心配置说明
 
 ### 配置层级
@@ -337,6 +476,19 @@ graph TB
 | **shuai-yemao-workflow** | 工作流（15+） | https://github.com/shuai-yemao/shuai-yemao-workflow |
 
 ## 📋 更新日志
+
+### 2026-06-25
+
+- ✅ 新增 MCP 服务器配置
+  - Context7 MCP - 实时文档查询（resolve-library-id, query-docs）
+  - DBHub MCP - 数据库连接（execute_sql, search_objects）
+- ✅ 新增 Clawd on Desk 桌面宠物
+  - 实时显示 Claude Code 工作状态
+  - 12 种动画状态
+  - 权限气泡提醒
+  - 拖拽移动和迷你模式
+- ✅ 更新系统架构图，添加 MCP 和桌面宠物
+- ✅ 更新插件系统图，添加 MCP 服务器部分
 
 ### 2026-06-24
 
