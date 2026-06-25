@@ -222,30 +222,26 @@ graph TB
         B[DBHub] --> B1[数据库连接]
         B --> B2[SQL 执行]
         B --> B3[数据库对象搜索]
-
-        C[yemao050417] --> C1[自定义 MCP]
-        C --> C2[HTTP 传输]
     end
 
     subgraph "支持的数据库"
-        D[SQLite] --> D1[轻量级嵌入式]
-        E[PostgreSQL] --> E1[功能强大]
-        F[MySQL] --> F1[流行开源]
-        G[SQL Server] --> G1[企业级]
+        C[SQLite] --> C1[轻量级嵌入式]
+        D[PostgreSQL] --> D1[功能强大]
+        E[MySQL] --> E1[流行开源]
+        F[SQL Server] --> F1[企业级]
     end
 
+    B --> C
     B --> D
     B --> E
     B --> F
-    B --> G
 
     style A fill:#e8f5e9
     style B fill:#e3f2fd
-    style C fill:#fff3e0
-    style D fill:#f3e5f5
-    style E fill:#e1f5fe
-    style F fill:#fce4ec
-    style G fill:#e0f7fa
+    style C fill:#f3e5f5
+    style D fill:#e1f5fe
+    style E fill:#fce4ec
+    style F fill:#e0f7fa
 ```
 
 ### MCP 配置
@@ -489,6 +485,7 @@ graph TB
   - 拖拽移动和迷你模式
 - ✅ 更新系统架构图，添加 MCP 和桌面宠物
 - ✅ 更新插件系统图，添加 MCP 服务器部分
+- ✅ 移除 yemao050417 MCP 服务器（未使用）
 
 ### 2026-06-24
 
