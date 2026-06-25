@@ -289,7 +289,8 @@ claude
     "claude-hud@claude-hud": true,
     "superpowers@superpowers-marketplace": true,
     "ecc@ecc": true,
-    "understand-anything@Understand-Anything": true
+    "claude-mem@thedotmack": true,
+    "understand-anything@understand-anything": true
   }
 }
 ```
@@ -321,6 +322,12 @@ claude
       "source": {
         "source": "git",
         "url": "https://github.com/affaan-m/ECC.git"
+      }
+    },
+    "understand-anything": {
+      "source": {
+        "source": "github",
+        "repo": "Lum1104/Understand-Anything"
       }
     }
   }

@@ -37,10 +37,18 @@ graph TB
         Q --> W[Understand-Anything<br/>知识图谱]
     end
 
+    subgraph "Hooks 系统"
+        H1[Clawd on Desk] --> H2[桌面宠物状态]
+        H3[ECC] --> H4[20+ 质量检查]
+        H5[Understand-Anything] --> H6[知识图谱更新]
+    end
+
     B --> X[Agent-First<br/>Test-Driven<br/>Security-First]
     C --> Y[79 Agent + 安全指南<br/>+ 编码风格 + 测试要求]
     J --> Z[ECC 标准规则]
     R --> AA[Agent 编排 + 工作流]
+    H1 --> AB[实时状态感知]
+    H3 --> AC[代码质量保障]
 ```
 
 ## 📦 仓库关系
@@ -83,6 +91,15 @@ git clone https://github.com/Lum1104/Understand-Anything.git ~/.claude/plugins/m
 cd ~/.claude/plugins/marketplaces/Understand-Anything
 ./install.sh claude
 
+# 在 settings.json 中启用插件
+# "enabledPlugins": {
+#   "ecc@ecc": true,
+#   "claude-hud@claude-hud": true,
+#   "superpowers@superpowers-marketplace": true,
+#   "claude-mem@thedotmack": true,
+#   "understand-anything@understand-anything": true
+# }
+
 # 配置 API Key
 vim ~/.claude/settings.json
 
@@ -109,17 +126,19 @@ flowchart TD
     H --> K[安装 Superpowers]
     H --> L[安装 Claude 中文]
     H --> M[安装 Claude Mem]
-    I --> N[配置 API Key]
-    J --> N
-    K --> N
-    L --> N
-    M --> N
-    N --> O[重启 Claude Code]
-    O --> P[完成]
+    H --> N[安装 Understand-Anything]
+    I --> O[配置 API Key]
+    J --> O
+    K --> O
+    L --> O
+    M --> O
+    N --> O
+    O --> P[重启 Claude Code]
+    P --> Q[完成]
 
     style A fill:#c8e6c9
-    style P fill:#c8e6c9
-    style N fill:#fff9c4
+    style Q fill:#c8e6c9
+    style O fill:#fff9c4
 ```
 
 ## 📁 仓库结构
@@ -149,6 +168,10 @@ graph TB
 
         E[bin/] --> E1[model-switch<br/>模型切换]
         E --> E2[switch-api.js<br/>API 切换]
+
+        F[hooks/] --> F1[hooks.json<br/>Clawd on Desk Hooks]
+        F --> F2[ECC Hooks<br/>20+ 质量检查]
+        F --> F3[Understand-Anything Hooks<br/>知识图谱更新]
     end
 
     style A fill:#e3f2fd
@@ -156,16 +179,18 @@ graph TB
     style C fill:#fff3e0
     style D fill:#f3e5f5
     style E fill:#e8f5e9
+    style F fill:#e0f7fa
 ```
 
 ## 🔌 插件系统
 
 ```mermaid
 graph TB
-    subgraph "已安装插件"
+    subgraph "已安装插件（6 个）"
         A[ECC] --> A1[79 Agent]
         A --> A2[271 Skills]
         A --> A3[92 Commands]
+        A --> A4[20+ Hooks]
 
         B[Claude HUD] --> B1[状态栏]
         B --> B2[进度显示]
@@ -183,6 +208,7 @@ graph TB
         F[Understand-Anything] --> F1[知识图谱]
         F --> F2[代码分析]
         F --> F3[可视化仪表板]
+        F --> F4[2 个 Hooks]
     end
 
     subgraph "插件来源"
@@ -215,10 +241,6 @@ graph TB
 ```mermaid
 graph TB
     subgraph "已配置 MCP 服务器"
-        A[Context7] --> A1[实时文档查询]
-        A --> A2[库 ID 解析]
-        A --> A3[代码示例获取]
-
         B[DBHub] --> B1[数据库连接]
         B --> B2[SQL 执行]
         B --> B3[数据库对象搜索]
@@ -236,7 +258,6 @@ graph TB
     B --> E
     B --> F
 
-    style A fill:#e8f5e9
     style B fill:#e3f2fd
     style C fill:#f3e5f5
     style D fill:#e1f5fe
@@ -249,10 +270,6 @@ graph TB
 ```json
 {
   "mcpServers": {
-    "context7": {
-      "command": "pnpm",
-      "args": ["dlx", "@upstash/context7-mcp@latest"]
-    },
     "dbhub": {
       "command": "pnpm",
       "args": ["dlx", "@bytebase/dbhub@latest", "--transport", "stdio"]
@@ -261,61 +278,53 @@ graph TB
 }
 ```
 
-**Context7 MCP** - 实时文档查询
-- `resolve-library-id`: 解析库 ID，获取最新的库文档
-- `query-docs`: 查询特定库的文档和代码示例
-- 支持任何编程库和框架
-
 **DBHub MCP** - 数据库连接
 - `execute_sql`: 执行 SQL 查询，支持事务和安全控制
 - `search_objects`: 搜索和探索数据库结构
 - 支持 SQLite, PostgreSQL, MySQL, SQL Server, MariaDB
 
-## 🦀 桌面宠物
+## 🔧 Hooks 系统
 
 ```mermaid
 graph TB
-    subgraph "Clawd on Desk"
-        A[像素螃蟹] --> A1[实时状态显示]
-        A --> A2[动画效果]
-        A --> A3[权限气泡]
-
-        B[支持的代理] --> B1[Claude Code]
-        B --> B2[Codex CLI]
-        B --> B3[Copilot CLI]
-        B --> B4[Gemini CLI]
-
-        C[功能特性] --> C1[12 种动画状态]
-        C --> C2[拖拽移动]
-        C --> C3[迷你模式]
-        C --> C4[免打扰模式]
+    subgraph "Clawd on Desk Hooks（settings.json）"
+        A[SessionStart] --> A1[auto-start.js]
+        A --> A2[clawd-hook.js]
+        B[PreToolUse] --> B1[clawd-hook.js]
+        C[PostToolUse] --> C1[clawd-hook.js]
+        D[Stop] --> D1[clawd-hook.js]
+        E[SessionEnd] --> E1[clawd-hook.js]
     end
 
-    subgraph "动画状态"
-        D[Idle] --> D1[空闲浮动]
-        E[Thinking] --> E1[思考旋转]
-        F[Typing] --> F1[打字动画]
-        G[Building] --> G1[建造动画]
-        H[Error] --> H1[错误动画]
-        I[Happy] --> I1[庆祝动画]
+    subgraph "ECC 插件 Hooks（20+）"
+        F[PreToolUse] --> F1[bash:dispatcher]
+        F --> F2[config-protection]
+        F --> F3[mcp-health-check]
+        F --> F4[gateguard-fact-force]
+        G[PostToolUse] --> G1[quality-gate]
+        G --> G2[design-quality-check]
+        G --> G3[console-warn]
+        G --> G4[ecc-context-monitor]
+        H[Stop] --> H1[format-typecheck]
+        H --> H2[cost-tracker]
+        H --> H3[desktop-notify]
     end
 
-    A1 --> D
-    A1 --> E
-    A1 --> F
-    A1 --> G
-    A1 --> H
-    A1 --> I
+    subgraph "Understand-Anything Hooks"
+        I[SessionStart] --> I1[知识图谱过时检查]
+        J[PostToolUse] --> J1[Git commit 检测]
+    end
 
-    style A fill:#ffebee
+    style A fill:#e3f2fd
     style B fill:#e3f2fd
-    style C fill:#e8f5e9
-    style D fill:#f3e5f5
-    style E fill:#fff3e0
+    style C fill:#e3f2fd
+    style D fill:#e3f2fd
+    style E fill:#e3f2fd
     style F fill:#e1f5fe
-    style G fill:#fce4ec
-    style H fill:#e0f7fa
-    style I fill:#c8e6c9
+    style G fill:#e1f5fe
+    style H fill:#e1f5fe
+    style I fill:#e0f7fa
+    style J fill:#e0f7fa
 ```
 
 ### Clawd on Desk 功能
@@ -352,7 +361,8 @@ npm start
 ```mermaid
 graph TB
     A[用户配置 - 最高优先级] --> B[插件配置 - 补充层]
-    B --> C[合并后生效]
+    B --> C[Hooks 配置 - 自动化层]
+    C --> D[合并后生效]
 
     A --> A1[CLAUDE.md - 全局指令]
     A --> A2[SOUL.md - 核心身份]
@@ -363,10 +373,17 @@ graph TB
     B --> B1[ECC - Agent + Skills]
     B --> B2[Claude HUD - 状态栏]
     B --> B3[Superpowers - 增强]
+    B --> B4[Claude Mem - 记忆]
+    B --> B5[Understand-Anything - 知识图谱]
+
+    C --> C1[Clawd on Desk - 桌面宠物]
+    C --> C2[ECC Hooks - 质量检查]
+    C --> C3[Understand-Anything Hooks - 知识图谱]
 
     style A fill:#c8e6c9
     style B fill:#e3f2fd
-    style C fill:#fff9c4
+    style C fill:#e0f7fa
+    style D fill:#fff9c4
 ```
 
 ### CLAUDE.md - 全局指令
@@ -478,17 +495,17 @@ graph TB
 - ✅ 更新 Agent 数量：67 → 79（新增 embedded-expert、test-runner 等 12 个 Agent）
 - ✅ 同步所有 Agent 定义文件到仓库
 - ✅ 更新配置文件（AGENTS.md / SOUL.md / CLAUDE.md / USER.md）
-- ✅ 新增 MCP 服务器配置
-  - Context7 MCP - 实时文档查询（resolve-library-id, query-docs）
-  - DBHub MCP - 数据库连接（execute_sql, search_objects）
-- ✅ 新增 Clawd on Desk 桌面宠物
-  - 实时显示 Claude Code 工作状态
-  - 12 种动画状态
-  - 权限气泡提醒
-  - 拖拽移动和迷你模式
-- ✅ 更新系统架构图，添加 MCP 和桌面宠物
-- ✅ 更新插件系统图，添加 MCP 服务器部分
-- ✅ 移除 yemao050417 MCP 服务器（未使用）
+- ✅ 启用 Understand-Anything 插件（知识图谱）
+  - 添加到 enabledPlugins
+  - 配置 SessionStart 和 PostToolUse hooks
+- ✅ 启用 ECC 插件（20+ hooks 已加载）
+  - PreToolUse: bash:dispatcher, config-protection, mcp-health-check, gateguard-fact-force
+  - PostToolUse: quality-gate, design-quality-check, console-warn, ecc-context-monitor
+  - Stop: format-typecheck, cost-tracker, desktop-notify
+- ✅ 更新插件系统图（6 个插件）
+- ✅ 更新 MCP 服务器配置（仅 DBHub）
+- ✅ 新增 Hooks 系统图（Clawd on Desk + ECC + Understand-Anything）
+- ✅ 移除 Context7 MCP（未配置）
 
 ### 2026-06-24
 
