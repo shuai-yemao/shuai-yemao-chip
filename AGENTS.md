@@ -1,8 +1,8 @@
 # Everything Claude Code (ECC) — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 69 specialized agents, 271 skills, 92 commands, and automated hook workflows for software development.
+This is a **production-ready AI coding plugin** providing 163 specialized agents, 107 skills, commands, and automated hook workflows for software development.
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 
 ## Core Principles
 
@@ -49,6 +49,11 @@ This is a **production-ready AI coding plugin** providing 69 specialized agents,
 | typescript-reviewer | TypeScript/JavaScript code review | TypeScript/JavaScript projects |
 | embedded-expert | 嵌入式系统开发专家 | STM32/ESP32/RISC-V, HAL/LL/寄存器开发 |
 | test-runner | 测试执行专家 | 运行和分析 Workflow 测试套件 |
+| codex:codex-rescue | Codex 协作救援 | Claude Code 卡住时的代码救援 |
+| hookify:conversation-analyzer | 会话分析 | 分析对话发现不良行为 |
+| claude-md-management:claude-md-improver | CLAUDE.md 管理 | 审查和优化 CLAUDE.md |
+| skill-creator:skill-creator | 技能创建 | 创建/优化/评估技能 |
+| session-report:session-report | 会话报告 | 生成 HTML 使用报告 |
 
 ## Agent Orchestration
 
@@ -155,9 +160,9 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 ## Project Structure
 
 ```
-agents/          — 69 specialized subagents
-skills/          — 271 workflow skills and domain knowledge
-commands/        — 92 slash commands
+agents/          — 163 specialized subagents
+skills/          — 107 workflow skills and domain knowledge
+commands/        — slash commands
 hooks/           — Trigger-based automations
 rules/           — Always-follow guidelines (common + per-language)
 scripts/         — Cross-platform Node.js utilities

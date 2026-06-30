@@ -78,5 +78,6 @@ Use the following skills when working on related files:
 | `README.md` | `/readme` |
 | `.github/workflows/*.yml` | `/ci-workflow` |
 | `*.tsx`, `*.jsx`, `components/**` | `react-patterns`, `react-testing` — for React-specific work invoke `/react-review`, `/react-build`, `/react-test` |
+| `*.c`, `*.h`, `*.cpp`, `STM32*`, `ESP32*`, `firmware/**` | `embedded-expert` — use for embedded development with STM32/ESP32/RISC-V |
 
 When spawning subagents, always pass conventions from the respective skill into the agent's prompt.

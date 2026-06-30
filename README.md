@@ -21,7 +21,7 @@ graph TB
     end
 
     subgraph "Agent 系统"
-        K[79 专业 Agent] --> L[planner<br/>实现规划]
+        K[163 专业 Agent] --> L[planner<br/>实现规划]
         K --> M[architect<br/>系统设计]
         K --> N[code-reviewer<br/>代码审查]
         K --> O[security-reviewer<br/>安全检测]
@@ -29,12 +29,13 @@ graph TB
     end
 
     subgraph "插件系统"
-        Q[plugins/] --> R[ECC<br/>79 Agent + 271 Skills]
+        Q[12 插件] --> R[ECC<br/>Agent + Skills]
         Q --> S[Claude HUD<br/>状态栏]
         Q --> T[Superpowers<br/>增强功能]
-        Q --> U[Claude 中文<br/>汉化]
+        Q --> U[官方插件<br/>7 个]
         Q --> V[Claude Mem<br/>记忆管理]
         Q --> W[Understand-Anything<br/>知识图谱]
+        Q --> X1[Codex<br/>OpenAI 集成]
     end
 
     subgraph "Hooks 系统"
@@ -44,7 +45,7 @@ graph TB
     end
 
     B --> X[Agent-First<br/>Test-Driven<br/>Security-First]
-    C --> Y[79 Agent + 安全指南<br/>+ 编码风格 + 测试要求]
+    C --> Y[163 Agent + 安全指南<br/>+ 编码风格 + 测试要求]
     J --> Z[ECC 标准规则]
     R --> AA[Agent 编排 + 工作流]
     H1 --> AB[实时状态感知]
@@ -91,13 +92,21 @@ git clone https://github.com/Lum1104/Understand-Anything.git ~/.claude/plugins/m
 cd ~/.claude/plugins/marketplaces/Understand-Anything
 ./install.sh claude
 
-# 在 settings.json 中启用插件
+# 在 settings.json 中启用插件（12 个）
 # "enabledPlugins": {
 #   "ecc@ecc": true,
 #   "claude-hud@claude-hud": true,
 #   "superpowers@superpowers-marketplace": true,
+#   "claude-code-zh-cn": true,
 #   "claude-mem@thedotmack": true,
-#   "understand-anything@understand-anything": true
+#   "understand-anything@understand-anything": true,
+#   "codex@openai-codex": true,
+#   "clangd-lsp@claude-plugins-official": true,
+#   "pyright-lsp@claude-plugins-official": true,
+#   "claude-md-management@claude-plugins-official": true,
+#   "hookify@claude-plugins-official": true,
+#   "skill-creator@claude-plugins-official": true,
+#   "session-report@claude-plugins-official": true
 # }
 
 # 配置 API Key
@@ -148,7 +157,7 @@ graph TB
     subgraph "shuai-yemao-chip"
         A[config/] --> A1[CLAUDE.md<br/>ECC 全局指令]
         A --> A2[SOUL.md<br/>ECC 核心身份]
-        A --> A3[AGENTS.md<br/>ECC 79 Agent 指令]
+        A --> A3[AGENTS.md<br/>ECC 163 Agent 指令]
         A --> A4[USER.md<br/>用户配置]
         A --> A5[settings.json<br/>已脱敏]
 
@@ -182,15 +191,15 @@ graph TB
     style F fill:#e0f7fa
 ```
 
-## 🔌 插件系统
+## 🔌 插件系统（12 个）
 
 ```mermaid
 graph TB
-    subgraph "已安装插件（6 个）"
-        A[ECC] --> A1[79 Agent]
-        A --> A2[271 Skills]
-        A --> A3[92 Commands]
-        A --> A4[20+ Hooks]
+    subgraph "社区插件"
+        A[ECC] --> A1[163 Agent]
+        A --> A2[107 Skills]
+        A --> A3[Commands]
+        A --> A4[Hooks]
 
         B[Claude HUD] --> B1[状态栏]
         B --> B2[进度显示]
@@ -207,26 +216,44 @@ graph TB
 
         F[Understand-Anything] --> F1[知识图谱]
         F --> F2[代码分析]
-        F --> F3[可视化仪表板]
-        F --> F4[2 个 Hooks]
+
+        G[Codex] --> G1[OpenAI 集成]
+        G --> G2[协作编程]
+    end
+
+    subgraph "官方插件（Anthropic）"
+        H[clangd-lsp] --> H1[C/C++ 代码智能]
+        I[pyright-lsp] --> I1[Python 类型检查]
+        J[claude-md-management] --> J1[CLAUDE.md 管理]
+        K[hookify] --> K1[Hook 自动创建]
+        L[skill-creator] --> L1[技能创建/评估]
+        M[session-report] --> M1[会话报告生成]
     end
 
     subgraph "插件来源"
-        G[GitHub 仓库]
-        G --> H[affaan-m/ECC]
-        G --> I[jarrodwatts/claude-hud]
-        G --> J[obra/superpowers-marketplace]
-        G --> K[anthropics/claude-plugins-official]
-        G --> L[thedotmack/claude-mem]
-        G --> M[Lum1104/Understand-Anything]
+        N[GitHub 仓库]
+        N --> O[affaan-m/ECC]
+        N --> P[jarrodwatts/claude-hud]
+        N --> Q[obra/superpowers-marketplace]
+        N --> R[anthropics/claude-plugins-official]
+        N --> S[thedotmack/claude-mem]
+        N --> T[Lum1104/Understand-Anything]
+        N --> U[openai/codex-plugin-cc]
     end
 
-    H --> A
-    I --> B
-    J --> C
-    K --> D
-    L --> E
-    M --> F
+    O --> A
+    P --> B
+    Q --> C
+    R --> D
+    R --> H
+    R --> I
+    R --> J
+    R --> K
+    R --> L
+    R --> M
+    S --> E
+    T --> F
+    U --> G
 
     style A fill:#e1f5fe
     style B fill:#f3e5f5
@@ -234,6 +261,13 @@ graph TB
     style D fill:#fff3e0
     style E fill:#fce4ec
     style F fill:#e0f7fa
+    style G fill:#ede7f6
+    style H fill:#ffebee
+    style I fill:#ffebee
+    style J fill:#ffebee
+    style K fill:#ffebee
+    style L fill:#ffebee
+    style M fill:#ffebee
 ```
 
 ## 🔗 MCP 服务器
@@ -414,7 +448,7 @@ ECC 的核心身份和原则：
 
 ### AGENTS.md - Agent 指令
 
-ECC v2.0.0 提供 **79 个专业 Agent**：
+ECC v2.1.0 提供 **163 个专业 Agent**：
 
 | Agent 类别 | 代表 Agent | 用途 |
 |------------|-----------|------|
@@ -490,9 +524,24 @@ graph TB
 
 ## 📋 更新日志
 
+### 2026-06-30
+
+- ✅ 新增 6 个官方插件（global 作用域）
+  - **clangd-lsp** — C/C++ 代码智能提示、跳转、诊断
+  - **pyright-lsp** — Python 类型检查和代码智能
+  - **claude-md-management** — CLAUDE.md 审查和会话学习捕获
+  - **hookify** — Hook 自动化创建（分析会话预防不良行为）
+  - **skill-creator** — 技能创建、优化和评估
+  - **session-report** — HTML 会话报告（令牌/缓存/子代理）
+- ✅ 新增 Codex 插件（OpenAI 协作编程）
+- ✅ 新增 claude-plugins-official 市场源配置
+- ✅ 更新 plugin-registry.json 注册表
+- ✅ 同步 settings.json（hooks/statusline/spinner/language）
+- ✅ 插件总数：6 → 12，Agent 总数：79 → 163，Skills：107+
+
 ### 2026-06-25
 
-- ✅ 更新 Agent 数量：67 → 79（新增 embedded-expert、test-runner 等 12 个 Agent）
+- ✅ 更新 Agent 数量：163（含官方插件新增）
 - ✅ 同步所有 Agent 定义文件到仓库
 - ✅ 更新配置文件（AGENTS.md / SOUL.md / CLAUDE.md / USER.md）
 - ✅ 启用 Understand-Anything 插件（知识图谱）
@@ -502,7 +551,7 @@ graph TB
   - PreToolUse: bash:dispatcher, config-protection, mcp-health-check, gateguard-fact-force
   - PostToolUse: quality-gate, design-quality-check, console-warn, ecc-context-monitor
   - Stop: format-typecheck, cost-tracker, desktop-notify
-- ✅ 更新插件系统图（6 个插件）
+- ✅ 更新插件系统图（12 个插件）
 - ✅ 更新 MCP 服务器配置（仅 DBHub）
 - ✅ 新增 Hooks 系统图（Clawd on Desk + ECC + Understand-Anything）
 - ✅ 移除 Context7 MCP（未配置）

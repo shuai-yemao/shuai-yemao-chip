@@ -4,18 +4,18 @@
   "env": {
     "ALL_PROXY": "socks5://127.0.0.1:7897",
     "ANTHROPIC_AUTH_TOKEN": "YOUR_API_KEY_HERE",
-    "ANTHROPIC_BASE_URL": "https://api.anthropic.com",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-haiku-4-5-20251001",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-8",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-6",
-    "ANTHROPIC_MODEL": "claude-sonnet-4-6",
+    "ANTHROPIC_BASE_URL": "https://api.deepseek.com/anthropic",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "deepseek-v4-flash[1m]",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-v4-pro[1m]",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "deepseek-v4-pro[1m]",
+    "ANTHROPIC_MODEL": "deepseek-v4-pro[1m]",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_EFFORT_LEVEL": "high",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "16000",
     "CLAUDE_CODE_SKIP_FAST_MODE_NETWORK_ERRORS": "1",
     "CLAUDE_CODE_SKIP_UPDATE_CHECK": "1",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-haiku-4-5-20251001",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-v4-flash[1m]",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
     "EDITOR": "code --wait",
     "LANG": "zh_CN.UTF-8",
@@ -27,79 +27,93 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
-      "Read(*)",
-      "Edit(*)",
-      "Write(*)",
-      "Glob(*)",
-      "Grep(*)",
-      "Bash(*)",
-      "MCP(*)",
-      "Agent(*)",
-      "Skill(*)",
-      "WebSearch",
-      "WebFetch",
-      "TaskCreate(*)",
-      "TaskUpdate(*)",
-      "TaskList(*)",
-      "TaskGet(*)",
-      "TaskOutput(*)",
-      "TaskStop(*)",
-      "SendMessage(*)",
-      "Monitor(*)",
-      "ScheduleWakeup(*)",
-      "CronCreate(*)",
-      "CronList(*)",
-      "CronDelete(*)"
+      "Read(*)", "Edit(*)", "Write(*)", "Glob(*)", "Grep(*)",
+      "Bash(*)", "MCP(*)", "Agent(*)", "Skill(*)",
+      "WebSearch", "WebFetch",
+      "TaskCreate(*)", "TaskUpdate(*)", "TaskList(*)", "TaskGet(*)",
+      "TaskOutput(*)", "TaskStop(*)",
+      "SendMessage(*)", "Monitor(*)",
+      "ScheduleWakeup(*)", "CronCreate(*)", "CronList(*)", "CronDelete(*)"
     ],
     "defaultMode": "auto"
   },
+  "model": "haiku",
   "hooks": {
     "PostCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_CONFIG_DIR}/bin/homunculus-hook.js --action capture",
-            "timeout": 30,
-            "async": true
-          }
-        ]
-      }
+      { "matcher": "", "hooks": [{ "type": "command", "command": "node ${CLAUDE_CONFIG_DIR}/bin/homunculus-hook.js --action capture", "timeout": 30, "async": true }] },
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" PostCompact", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "SessionStart": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/auto-start.js\"", "shell": "powershell", "timeout": 15, "async": true }] },
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" SessionStart", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "SessionEnd": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" SessionEnd", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "UserPromptSubmit": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" UserPromptSubmit", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "PreToolUse": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" PreToolUse", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "PostToolUse": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" PostToolUse", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "PostToolUseFailure": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" PostToolUseFailure", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "Stop": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" Stop", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "SubagentStart": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" SubagentStart", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "SubagentStop": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" SubagentStop", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "Notification": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" Notification", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "Elicitation": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" Elicitation", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "PreCompact": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" PreCompact", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "StopFailure": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "& \"NODE_PATH\" \"CLAWD_PATH/hooks/clawd-hook.js\" StopFailure", "shell": "powershell", "timeout": 5, "async": true }] }
+    ],
+    "PermissionRequest": [
+      { "matcher": "", "hooks": [{ "type": "http", "url": "http://127.0.0.1:23333/permission", "timeout": 600 }] }
     ]
   },
   "enableWorkflows": true,
+  "statusLine": {
+    "type": "command",
+    "command": "cols=${COLUMNS:-}; case \"$cols\" in \"\"|*[!0-9]*) cols=$(stty size </dev/tty 2>/dev/null | awk '{print }');; esac; case \"$cols\" in \"\"|*[!0-9]*) cols=120;; esac; export COLUMNS=$(( cols > 4 ? cols - 4 : 1 )); plugin_dir=$(ls -1d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/*/claude-hud/*/ 2>/dev/null | sort -V | tail -1); exec \"YOUR_NODE_PATH\" \"${plugin_dir}dist/index.js\""
+  },
   "enabledPlugins": {
     "claude-code-zh-cn": true,
     "claude-hud@claude-hud": true,
     "superpowers@superpowers-marketplace": true,
-    "ecc@ecc": true
+    "ecc@ecc": true,
+    "claude-mem@thedotmack": true,
+    "understand-anything@understand-anything": true,
+    "codex@openai-codex": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "session-report@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    },
-    "claude-hud": {
-      "source": {
-        "source": "github",
-        "repo": "jarrodwatts/claude-hud"
-      }
-    },
-    "superpowers-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "obra/superpowers-marketplace"
-      }
-    },
-    "ecc": {
-      "source": {
-        "source": "git",
-        "url": "https://github.com/affaan-m/ECC.git"
-      }
-    }
+    "anthropic-agent-skills": { "source": { "source": "github", "repo": "anthropics/skills" } },
+    "claude-hud": { "source": { "source": "github", "repo": "jarrodwatts/claude-hud" } },
+    "superpowers-marketplace": { "source": { "source": "github", "repo": "obra/superpowers-marketplace" } },
+    "ecc": { "source": { "source": "git", "url": "https://github.com/affaan-m/ECC.git" } },
+    "understand-anything": { "source": { "source": "github", "repo": "Lum1104/Understand-Anything" } },
+    "openai-codex": { "source": { "source": "github", "repo": "openai/codex-plugin-cc" } }
   },
   "language": "Chinese",
   "spinnerTipsEnabled": true,
@@ -107,10 +121,8 @@
   "skipWorkflowUsageWarning": true,
   "theme": "dark-daltonized",
   "mcpServers": {
-    "yemao050417": {
-      "type": "http",
-      "url": "https://mcp.smithery.run/yemao050417"
-    }
+    "dbhub": { "command": "pnpm", "args": ["dlx", "@bytebase/dbhub@latest", "--transport", "stdio"] },
+    "yemao050417": { "type": "http", "url": "https://mcp.smithery.run/yemao050417" }
   },
   "skills": {
     "directories": [

@@ -1,6 +1,6 @@
 # Everything Claude Code (ECC) — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 67 specialized agents, 271 skills, 92 commands, and automated hook workflows for software development.
+This is a **production-ready AI coding plugin** providing 69 specialized agents, 271 skills, 92 commands, and automated hook workflows for software development.
 
 **Version:** 2.0.0
 
@@ -47,6 +47,8 @@ This is a **production-ready AI coding plugin** providing 67 specialized agents,
 | pytorch-build-resolver | PyTorch runtime/CUDA/training errors | PyTorch build/training failures |
 | mle-reviewer | Production ML pipeline review | ML pipelines, evals, serving, monitoring, rollback |
 | typescript-reviewer | TypeScript/JavaScript code review | TypeScript/JavaScript projects |
+| embedded-expert | 嵌入式系统开发专家 | STM32/ESP32/RISC-V, HAL/LL/寄存器开发 |
+| test-runner | 测试执行专家 | 运行和分析 Workflow 测试套件 |
 
 ## Agent Orchestration
 
@@ -59,6 +61,8 @@ Use agents proactively without user prompt:
 - Brownfield project onboarding → **spec-miner**
 - Autonomous loops / loop monitoring → **loop-operator**
 - Harness config reliability and cost → **harness-optimizer**
+- 嵌入式开发（STM32/ESP32/RISC-V） → **embedded-expert**
+- 运行测试套件 → **test-runner**
 
 Use parallel execution for independent operations — launch multiple agents simultaneously.
 
@@ -151,7 +155,7 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 ## Project Structure
 
 ```
-agents/          — 67 specialized subagents
+agents/          — 69 specialized subagents
 skills/          — 271 workflow skills and domain knowledge
 commands/        — 92 slash commands
 hooks/           — Trigger-based automations

@@ -1,5 +1,15 @@
 # Claude Code 配置架构说明
 
+## 🏗️ 配置架构
+
+当前系统配置统计：
+- **12 个插件**（6 社区 + 6 官方 Anthropic）
+- **163 个 Agent**（含 ECC + 官方插件代理）
+- **107 个 Skills**（嵌入式/I2C/SPI/UART/FreeRTOS/LVGL 等）
+- **45 个 Hooks**（Clawd on Desk + ECC 质量检查）
+- **2 个 LSP 服务器**（clangd + pyright）
+- **2 个 MCP 服务器**（DBHub + yemao050417）
+
 ## 配置层级关系
 
 ```

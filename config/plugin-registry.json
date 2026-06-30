@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "plugins": {
+    "claude-hud@claude-hud": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\claude-hud\\claude-hud\\0.2.0",
+        "version": "0.2.0",
+        "installedAt": "2026-06-25T11:57:21.802Z",
+        "lastUpdated": "2026-06-25T11:57:21.802Z",
+        "gitCommitSha": "b29bd345860cab4ac442dee829825eb2b423fccd"
+      }
+    ],
+    "superpowers@superpowers-marketplace": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\superpowers-marketplace\\superpowers\\6.0.2",
+        "version": "6.0.2",
+        "installedAt": "2026-06-25T11:57:21.802Z",
+        "lastUpdated": "2026-06-25T11:57:21.802Z",
+        "gitCommitSha": "98ba07139691caed69459f4c6d3c658eaedcdb45"
+      }
+    ],
+    "ecc@ecc": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\ecc\\ecc\\2.0.0",
+        "version": "2.0.0",
+        "installedAt": "2026-06-25T11:57:21.802Z",
+        "lastUpdated": "2026-06-25T11:57:21.802Z",
+        "gitCommitSha": "ceca28852e5b31edbbf66ebccc8fd163dd14208e"
+      }
+    ],
+    "claude-mem@thedotmack": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\thedotmack\\claude-mem\\13.6.2",
+        "version": "13.6.2",
+        "installedAt": "2026-06-25T11:57:21.802Z",
+        "lastUpdated": "2026-06-25T11:57:21.802Z",
+        "gitCommitSha": "786e167b448fe42ba88c5b224cf0e37f6fcbd0c0"
+      }
+    ],
+    "understand-anything@understand-anything": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\understand-anything\\understand-anything\\2.8.1",
+        "version": "2.8.1",
+        "installedAt": "2026-06-26T02:40:05.086Z",
+        "lastUpdated": "2026-06-26T02:40:05.086Z",
+        "gitCommitSha": "54754a6f97051d1d76c8758353d8ea41afe502a6"
+      }
+    ],
+    "codex@openai-codex": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\openai-codex\\codex\\1.0.5",
+        "version": "1.0.5",
+        "installedAt": "2026-06-26T13:04:06.603Z",
+        "lastUpdated": "2026-06-26T13:04:06.603Z",
+        "gitCommitSha": "80c31f99570876c3ef40327838b0a2ca1ae2cd9c"
+      }
+    ],
+    "clangd-lsp@claude-plugins-official": [
+      {
+        "scope": "global",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\claude-plugins-official\\clangd-lsp\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-06-30T06:00:00.000Z",
+        "lastUpdated": "2026-06-30T06:00:00.000Z",
+        "gitCommitSha": "cd3ca5bd4a4b62bf006b59b68848b59e95f95439"
+      }
+    ],
+    "pyright-lsp@claude-plugins-official": [
+      {
+        "scope": "global",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\claude-plugins-official\\pyright-lsp\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-06-30T06:00:00.000Z",
+        "lastUpdated": "2026-06-30T06:00:00.000Z",
+        "gitCommitSha": "cd3ca5bd4a4b62bf006b59b68848b59e95f95439"
+      }
+    ],
+    "claude-md-management@claude-plugins-official": [
+      {
+        "scope": "global",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\claude-plugins-official\\claude-md-management\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-06-30T06:00:00.000Z",
+        "lastUpdated": "2026-06-30T06:00:00.000Z",
+        "gitCommitSha": "cd3ca5bd4a4b62bf006b59b68848b59e95f95439"
+      }
+    ],
+    "hookify@claude-plugins-official": [
+      {
+        "scope": "global",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\claude-plugins-official\\hookify\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-06-30T06:00:00.000Z",
+        "lastUpdated": "2026-06-30T06:00:00.000Z",
+        "gitCommitSha": "cd3ca5bd4a4b62bf006b59b68848b59e95f95439"
+      }
+    ],
+    "skill-creator@claude-plugins-official": [
+      {
+        "scope": "global",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\claude-plugins-official\\skill-creator\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-06-30T06:00:00.000Z",
+        "lastUpdated": "2026-06-30T06:00:00.000Z",
+        "gitCommitSha": "cd3ca5bd4a4b62bf006b59b68848b59e95f95439"
+      }
+    ],
+    "session-report@claude-plugins-official": [
+      {
+        "scope": "global",
+        "installPath": "C:\\Users\\zhang\\.claude\\plugins\\cache\\claude-plugins-official\\session-report\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-06-30T06:00:00.000Z",
+        "lastUpdated": "2026-06-30T06:00:00.000Z",
+        "gitCommitSha": "cd3ca5bd4a4b62bf006b59b68848b59e95f95439"
+      }
+    ]
+  }
+}
